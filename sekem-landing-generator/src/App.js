@@ -23,6 +23,7 @@ function App() {
   // State for nav dropdowns
   const [productsOpen, setProductsOpen] = useState(false);
   const [storyOpen, setStoryOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false); // mobile nav
   const navRef = useRef();
 
   // Close dropdowns when clicking outside
@@ -35,6 +36,15 @@ function App() {
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close nav on route change or overlay click (mobile)
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth > 800) setNavOpen(false);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Handle form changes
@@ -70,14 +80,26 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
+  // Overlay for mobile nav
+  const showOverlay = navOpen && window.innerWidth <= 800;
+
   return (
     <div className="sekem-app-bg">
       <header className="sekem-header">
         <div className="sekem-header-content">
           <img src={logo} alt="Sekem Logo" className="sekem-header-logo" />
-          <nav className="sekem-nav" ref={navRef}>
+          <button className={`skem-hamburger${navOpen ? ' open' : ''}`} aria-label="Open navigation" style={{display: window.innerWidth <= 800 ? 'flex' : 'none'}} onClick={() => setNavOpen((open) => !open)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav
+            className={`sekem-nav${navOpen ? ' open' : ''}`}
+            ref={navRef}
+            style={window.innerWidth <= 800 ? {position: 'fixed'} : {}}
+          >
             <a href="https://sekemonline.com/" className="sekem-nav-link" target="_blank" rel="noopener noreferrer">Home</a>
-            <div className="sekem-nav-dropdown-wrapper">
+            <div className={`sekem-nav-dropdown-wrapper${productsOpen ? ' open' : ''}`}> 
               <span
                 className="sekem-nav-link sekem-nav-link-dropdown"
                 tabIndex={0}
@@ -92,7 +114,7 @@ function App() {
                 </div>
               )}
             </div>
-            <div className="sekem-nav-dropdown-wrapper">
+            <div className={`sekem-nav-dropdown-wrapper${storyOpen ? ' open' : ''}`}> 
               <span
                 className="sekem-nav-link sekem-nav-link-dropdown"
                 tabIndex={0}
@@ -109,6 +131,7 @@ function App() {
             </div>
             <a href="https://sekemonline.com/policies/contact-information" className="sekem-nav-link" target="_blank" rel="noopener noreferrer">Contact</a>
           </nav>
+          {showOverlay && <div className="mobile-nav-overlay" onClick={()=>setNavOpen(false)}></div>}
         </div>
       </header>
       <main className="app-container sekem-main">
@@ -124,7 +147,7 @@ function App() {
         </div>
       </main>
       <footer className="sekem-footer">
-        <div className="sekem-footer-content">
+        <div className="sekem-footer-content" style={window.innerWidth <= 800 ? {flexDirection:'column',alignItems:'flex-start',gap:'0.5rem',textAlign:'left'} : {}}>
           <span>© {new Date().getFullYear()} Sekem Online</span>
           <span className="sekem-footer-links">
             <a href="https://sekemonline.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> | <a href="https://sekemonline.com/policies/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of Service</a>
