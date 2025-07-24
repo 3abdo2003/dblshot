@@ -98,6 +98,16 @@ function App() {
             ref={navRef}
             style={window.innerWidth <= 800 ? {position: 'fixed'} : {}}
           >
+            {window.innerWidth <= 800 && navOpen && (
+              <button
+                className="mobile-nav-close"
+                aria-label="Close navigation"
+                onClick={() => setNavOpen(false)}
+                style={{position:'absolute',top:18,right:18,background:'none',border:'none',fontSize:'2.2rem',color:'#bfa181',cursor:'pointer',zIndex:300,padding:0,lineHeight:1}}
+              >
+                &times;
+              </button>
+            )}
             <a href="https://sekemonline.com/" className="sekem-nav-link" target="_blank" rel="noopener noreferrer">Home</a>
             <div className={`sekem-nav-dropdown-wrapper${productsOpen ? ' open' : ''}`}> 
               <span
