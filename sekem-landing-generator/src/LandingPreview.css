@@ -1,0 +1,166 @@
+/* LandingPreview.css */
+
+/* Shared preview styles */
+.landing-preview {
+  flex: 1;
+  border: 2px solid; /* Color set by inline style for minimal template */
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 12px #0002;
+  overflow: hidden;
+  min-width: 300px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: border-color 0.5s, background 0.5s;
+}
+
+.hero {
+  padding: 2rem 1.5rem 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #eaf4fb;
+  transition: background 0.5s;
+}
+
+.landing-preview .hero-img-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+.landing-preview.elegant .hero-img-wrapper {
+  height: 240px;
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 2px 8px #0001;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.landing-preview.elegant .hero-img {
+  border-radius: 0 0 28px 28px;
+  box-shadow: 0 2px 12px var(--theme-color, #bfa181)33;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.landing-preview.elegant .hero-overlay {
+  background: linear-gradient(180deg, rgba(255,250,245,0.1) 0%, rgba(191,161,129,0.5) 100%);
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0.5rem 0 1rem 0;
+  text-align: center;
+  transition: color 0.5s;
+}
+
+.body-text {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cta-btn {
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #0002;
+  transition: background 0.2s, transform 0.3s;
+}
+
+.cta-btn:hover {
+  filter: brightness(0.95);
+  transform: scale(1.04);
+}
+
+/* Elegant template overrides */
+.landing-preview.elegant {
+  border: 2px solid #bfa181;
+  border-radius: 16px;
+  background: #fffaf5;
+  box-shadow: 0 2px 16px #bfa18133;
+}
+.elegant .hero {
+  background: linear-gradient(120deg, #fffaf5 60%, #f5e6d8 100%);
+}
+.elegant .hero-img {
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #bfa18133;
+}
+.elegant h1 {
+  color: #bfa181;
+  font-family: 'Georgia', serif;
+}
+.elegant .body-text {
+  color: #6d5c3d;
+}
+.elegant .cta-btn {
+  background: #bfa181;
+  border-radius: 7px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #bfa18133;
+}
+.elegant .cta-btn:hover {
+  background: #a68a5b;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+/* Animations */
+.animate-fadein {
+  animation: fadein 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 800px) {
+  .landing-preview {
+    min-width: 0;
+    margin-top: 0;
+  }
+  .hero {
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+
+.export-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  background: #bfa181;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #0002;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.3s;
+}
+.export-btn:hover {
+  background: #a68a5b;
+  transform: scale(1.04);
+} 
