@@ -35,7 +35,7 @@ A simple, clean, and maintainable React app for generating campaign landing page
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/3abdo2003/dblshot.git
    cd sekem-landing-generator
    ```
 
